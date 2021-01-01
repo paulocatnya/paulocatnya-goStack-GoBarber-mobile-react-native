@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 // import {Link} from 'react-router-dom';
 import {
     Image,
@@ -8,13 +8,15 @@ import {
     Platform
 } from 'react-native';
 
-import {useNavigation} from '@react-navigation/native';
-
+import { useNavigation } from '@react-navigation/native';
+import { Form } from '@unform/mobile'
 
 import logoImg from '../../assets/logo.png';
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import Icon from 'react-native-vector-icons/Feather'
+import { FormHandles } from '@unform/core';
+
 
 import {
     Container,
@@ -24,7 +26,9 @@ import {
 } from './styles';
 
 const SignUp: React.FC = () => {
+    const formRef = useRef<FormHandles>(null);
     const navigation = useNavigation();
+
     return (
 
         <>
@@ -42,35 +46,35 @@ const SignUp: React.FC = () => {
                         <View>
                             <Title>Crie sua conta</Title>
                         </View>
+                        <Form ref={formRef} onSubmit={(data) => { console.log(data)}}>
+                            <Input
+                                name="nome"
+                                icon="user"
+                                placeholder="Nome" />
 
-                        <Input
-                            name="nome"
-                            icon="user"
-                            placeholder="Nome" />
+                            <Input
+                                name="email"
+                                icon="mail"
+                                placeholder="Email" />
 
-                        <Input
-                            name="email"
-                            icon="mail"
-                            placeholder="Email" />
-
-                        <Input
-                            name="password"
-                            icon="lock"
-                            placeholder="Senha" />
+                            <Input
+                                name="password"
+                                icon="lock"
+                                placeholder="Senha" />
+                        </Form>
 
                         <Button
-                            onPress={ () => {
-                                console.log('pressionou')
-                            }}>
+                            onPress={() => formRef.current?.submitForm()}>
                             Cadastrar
                         </Button>
-                        <BackToSignIn onPress={() => navigation.goBack()}>
+
+                        <BackToSignIn onPress={() => navigation.navigate('SignIn')}>
                             <BackToSignInText>
                                 <Icon name="arrow-left" size={20} color="#fff" > </Icon>
-                               Voltar para logon 
+                               Voltar para logon
                             </BackToSignInText>
                         </BackToSignIn>
-                    </Container>                
+                    </Container>
                 </ScrollView>
             </KeyboardAvoidingView>
         </>
