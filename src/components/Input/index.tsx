@@ -5,7 +5,6 @@ import React, {
     useRef,
     useImperativeHandle,
     forwardRef,
-
 } from 'react';
 import { TextInputProps } from 'react-native'
 import { Container, TextInput, Icon } from './styles'
@@ -24,7 +23,6 @@ interface InputRef {
     focus(): void;
 }
 
-
 const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = ({ name, icon, ...rest }, ref) => {
     const inputElementRef = useRef<any>(null);
     const { registerField, defaultValue = '', fieldName, error } = useField(name);
@@ -40,8 +38,6 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = ({ name, ico
         setIsFocused(false);
         setIsFilled(!!inputValueRef.current.value)
     }, [])
-
-
 
     useImperativeHandle(ref, () => ({
         focus() {

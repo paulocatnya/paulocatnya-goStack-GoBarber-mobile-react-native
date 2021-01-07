@@ -1,4 +1,5 @@
 import React, { useCallback, useRef } from 'react';
+
 import {
     Image,
     View,
@@ -13,16 +14,14 @@ import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
+import Icon from 'react-native-vector-icons/Feather'
+
 
 import {useAuth} from '../../hooks/auth'
-
 import getValidationErrors from '../../utils/getValidationErrors'
-
-
 import logoImg from '../../assets/logo.png';
 import Button from '../../components/Button'
 import Input from '../../components/Input'
-import Icon from 'react-native-vector-icons/Feather'
 
 import {
     Container,
